@@ -7,6 +7,7 @@ from typing import Dict
 APP_ID = os.environ.get("APP_ID")
 APP_ID = os.environ.get("APP_KEY")
 SHEETY_URL = os.environ.get("SHEETY_URL")
+SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN")
 SHEET_NAME = "workout"
 API_URL = "https://trackapi.nutritionix.com"
 EXERCISE_ENDPOINT = "/v2/natural/exercise"
@@ -75,6 +76,7 @@ def post_data_to_google_sheet(data:list) -> None:
     # headers
     headers = \
         {
+            'Authorization':SHEETY_TOKEN,
             'Content-Type':"application/json"
         }
     
