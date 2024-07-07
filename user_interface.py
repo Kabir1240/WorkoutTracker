@@ -99,6 +99,7 @@ class UserInterface:
         workout_text = workout_entry.get()
         
         update_workouts(workout_text)
+        self.update()
         messagebox.showinfo(title="Workouts", message="Workout details updated")
     
     def update(self) -> None:
