@@ -1,16 +1,18 @@
 import os
+import json
 import requests
 from datetime import datetime
 from typing import Dict
 
 
-APP_ID = os.environ.get("APP_ID")
-APP_KEY = os.environ.get("APP_KEY")
-SHEETY_URL = os.environ.get("SHEETY_URL")
-SHEETY_TOKEN = os.environ.get("SHEETY_TOKEN")
+APP_ID = ""
+APP_KEY = ""
+SHEETY_URL = ""
+SHEETY_TOKEN = ""
 SHEET_NAME = "workout"
 API_URL = "https://trackapi.nutritionix.com"
 EXERCISE_ENDPOINT = "/v2/natural/exercise"
+KEYS_PATH = "keys.json"
 
 
 def get_workout_data_from_nutritionix(query:str) -> list:
@@ -90,12 +92,33 @@ def post_data_to_google_sheet(data:list[Dict]) -> None:
         response.raise_for_status()
 
 
+def update_global_variables() -> None:
+    """
+    retrieves data from keys.json and updates global variables for other functions.
+    """
+
+    global APP_ID
+    global APP_KEY
+    global SHEETY_URL
+    global SHEETY_TOKEN
+
+    with open(KEYS_PATH, 'r') as file:
+        keys = json.load(file)
+    
+    APP_ID = keys['APP_ID']
+    APP_KEY = keys['APP_KEY']
+    SHEETY_URL = keys['SHEETY_URL']
+    SHEETY_TOKEN = keys['SHEETY_TOKEN']
+
+
 def get_workouts() -> list[Dict]:
     """retrieves workouts from the google sheet
 
     Returns:
         list[Dict]: list of dictionaries, each dictionary representing one workout
     """
+
+    update_global_variables()
     # headers
     headers = \
         {
@@ -116,5 +139,6 @@ def update_workouts(query:str) -> None:
         query (str): a human written string, about their workouts.
     """
     
+    update_global_variables()
     workout_data = get_workout_data_from_nutritionix(query)
     post_data_to_google_sheet(workout_data)
