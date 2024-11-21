@@ -6,4 +6,4 @@ Uses the sheety API to update a google sheets document with the relevant data.
 -> Then, make a copy of this document, https://docs.google.com/spreadsheets/d/1DHL6Y8XAHSC_KhJsa9QMekwP8b4YheWZY_sxlH3i494/edit?usp=sharing in your own google drive.  
 -> Finally, the SHEETY_URL and SHEETY_TOKEN can be found on https://sheety.co/  Requires a free sign up. Allow it to edit the document you made earlier. Run the program and enjoy :)  
 
-  -> https://youtu.be/awfw1fJcYbI a demonstration of what the project looks like.
+  -> https://youtu.be/929N25AlZ54 a demonstration of what the project looks like.
